@@ -1,0 +1,11 @@
+
+class Hotel is subclass of Facility
+	types
+		public String = seq of char
+	operations
+		
+		public Hotel: String ==> Hotel
+		Hotel(n) == 
+			(Facility(n); return self)
+			
+end Hotel

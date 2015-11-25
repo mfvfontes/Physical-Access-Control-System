@@ -1,0 +1,30 @@
+
+class Policy
+	types
+		public CombAlg = <denyOverrides> | <permitOverrides>
+	instance variables
+		private target : Target;
+		private rules : set of Rule;
+		private ruleCombAlg: CombAlg;
+	operations
+	
+			public Policy: Target * set of Rule * CombAlg ==> Policy
+			Policy(t, r, rca) ==
+				(target := t;
+				 rules := r;
+				 ruleCombAlg := rca;
+				 return self);
+			
+			public GetTarget: () ==> Target
+			GetTarget() ==
+				(return target);
+				
+			public GetRules: () ==> set of Rule
+			GetRules() ==
+				(return rules);
+				
+			public GetRuleCombAlg: () ==> CombAlg
+			GetRuleCombAlg() ==
+				(return ruleCombAlg);
+			
+end Policy

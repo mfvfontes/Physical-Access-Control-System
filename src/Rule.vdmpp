@@ -1,0 +1,21 @@
+class Rule
+	types
+		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>
+	instance variables
+		private target : Target;
+		private effect : Effect := <Deny>;
+	operations
+	
+		public Rule: Target ==> Rule
+		Rule(t) ==
+			(target := t; return self);
+			
+		public GetTarget: () ==> Target
+		GetTarget() ==
+			(return target);
+			
+		public GetEffect: () ==> Effect
+		GetEffect() ==
+			(return effect);
+			
+end Rule

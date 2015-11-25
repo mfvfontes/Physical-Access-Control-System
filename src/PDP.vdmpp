@@ -1,0 +1,27 @@
+-- Policy Decision Point
+-- Evaluates access requests against authorization policies
+-- before issuing access decisions
+
+class PDP 
+	types
+		public CombAlg = <denyOverrides> | <permitOverrides>
+	instance variables
+		private policies : set of Policy;
+		private policyCombAlg: CombAlg;
+	operations
+		
+		public PDP: set of Policy * CombAlg ==> PDP
+		PDP(p, pca) ==
+			(policies := p;
+			 policyCombAlg := pca;
+			 return self);
+		
+		public GetPolicies: () ==> set of Policy
+		GetPolicies() ==
+			(return policies);
+		
+		public GetPolicyCombAlg: () ==> CombAlg
+		GetPolicyCombAlg() ==
+			(return policyCombAlg);
+		
+end PDP

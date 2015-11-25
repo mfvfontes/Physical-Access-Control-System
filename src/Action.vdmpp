@@ -1,0 +1,16 @@
+class Action
+	types
+		public Type = <Assign> | <View> | <Receive> 
+	instance variables
+		private type : Type;
+	operations
+	
+		public Action: Type ==> Action
+		Action(t) ==
+			(type := t; return self);
+			
+		public GetType: () ==> Type
+		GetType() ==
+			(return type);
+			
+end Action

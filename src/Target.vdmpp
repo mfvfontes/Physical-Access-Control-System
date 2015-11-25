@@ -1,0 +1,30 @@
+
+class Target
+	types
+		public Resource = <Int> | <Ext>
+	instance variables
+		private subjects : set of Subject;
+		private resources : set of Resource;
+		private actions : set of Action;
+	operations
+	
+		public Target: set of Subject * set of Resource * set of Action ==> Target
+		Target(s, r, a) ==
+			(subjects := s;
+			 resources := r;
+			 actions := a;
+			 return self);
+		
+		public GetSubjects: () ==> set of Subject
+		GetSubjects() ==
+			(return subjects);
+		
+		public GetResources: () ==> set of Resource
+		GetResources() ==
+			(return resources);
+			
+		public GetActions: () ==> set of Action
+		GetActions() ==
+			(return actions);
+		
+end Target

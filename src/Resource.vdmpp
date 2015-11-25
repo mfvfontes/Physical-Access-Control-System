@@ -1,0 +1,17 @@
+class Resource
+	types
+		public String = seq of char
+	instance variables
+		private name : String;
+	operations
+	
+		public Resource: String ==> Resource
+		Resource(n) ==
+			(name := n; return self)
+		post name = n;
+		
+		public GetName: () ==> String
+		GetName() ==
+			(return name);
+		
+end Resource

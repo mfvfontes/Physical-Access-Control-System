@@ -1,0 +1,17 @@
+class Facility
+	types
+		public String = seq of char
+	instance variables
+		private name : String;
+	operations
+			
+			public Facility: String ==> Facility
+			Facility (n) == 
+				(name := n; return self)
+				post name = n;
+				
+			public GetName: () ==> String
+			GetName () ==
+				return name;
+				
+end Facility
