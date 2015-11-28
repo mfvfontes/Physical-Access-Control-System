@@ -1,0 +1,33 @@
+
+class Access
+	types
+		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>
+	instance variables
+		private action : Action;
+		private target : Target;
+		private effect: Effect;
+	operations
+		
+		public Access: Target * Action * Effect ==> Access
+		Access(t, a, e) ==
+			(action := a;
+			 target := t;
+			 effect := e;
+			 return self)
+		post action = a and
+		     target = t and
+		     effect = e; 
+			
+		public GetAction: () ==> Action
+		GetAction () ==
+			(return action);
+			
+		public GetTarget: () ==> Target
+		GetTarget () ==
+			(return target);
+			
+		public GetEffect: () ==> Effect
+		GetEffect () ==
+			(return effect);
+		
+end Access

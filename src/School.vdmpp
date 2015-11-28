@@ -1,9 +1,0 @@
-
-class School is subclass of Facility
-	types
-		public String = seq of char
-	operations
-		public School: String ==> School
-		School(n) == 
-			(Facility(n); return self)
-end School

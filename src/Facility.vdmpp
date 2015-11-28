@@ -1,8 +1,11 @@
 class Facility
 	types
-		public String = seq of char
+		public String = seq of char;
+		public Log = seq of Access;
+		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
 	instance variables
 		private name : String;
+		private log : Log := [];
 	operations
 			
 			public Facility: String ==> Facility
@@ -14,4 +17,23 @@ class Facility
 			GetName () ==
 				return name;
 				
+			public GetLog: () ==> Log
+			GetLog () ==
+				return log;
+			
+			public AddAccess: Access ==> ()
+			AddAccess(a) ==
+				(log := log ^ [a]);				
+				
+			public GetAccessesByType: Effect ==> seq of Access
+			GetAccessesByType (effect) ==
+				(dcl accesses : seq of Access := [];
+				 for l in log do (
+				 		if (l.GetEffect() = effect)
+				 		then accesses := accesses ^ [l];
+				 );
+				 return accesses;
+				)
+			pre len log <> 0;
+			
 end Facility
