@@ -1,0 +1,21 @@
+class Request
+	types
+		public String = seq of char;
+		public Status = <Active> | <Pending> | <Finished>;
+	instance variables
+		private line : String;
+		private status: Status;
+	operations
+		
+		public Request: String ==> Request
+		Request(l) ==
+			(line := l;
+			 status := <Pending>;
+			 return self)
+		post line = l;
+		
+		public GetStatus: () ==> Status
+		GetStatus () ==
+			(return status);
+		
+end Request

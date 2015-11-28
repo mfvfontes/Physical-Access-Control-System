@@ -23,5 +23,9 @@ class PDP
 		public GetPolicyCombAlg: () ==> CombAlg
 		GetPolicyCombAlg() ==
 			(return policyCombAlg);
+			
+		public AddPolicy: Policy ==> ()
+		AddPolicy(p) ==
+			policies := policies union {p};
 		
 end PDP

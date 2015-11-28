@@ -1,0 +1,24 @@
+class SYS
+	types
+		public String = seq of char;
+	instance variables
+		private name : String;
+		private requests : seq of Request := [];
+	operations
+	
+		public SYS: String ==> SYS
+		SYS(n) ==
+			(name := n)
+		post name = n;
+	
+		public GetName: () ==> String
+		GetName() ==
+			(return name);
+			
+		public AddRequest: Request ==> ()
+		AddRequest(r) ==
+			(requests := requests ^ [r]);
+			
+		-- The requests must be forwarded to the PEP
+	
+end SYS

@@ -5,11 +5,11 @@ class Policy
 		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
 	instance variables
 		private target : Target;
-		private rules : seq of Rule;
+		private rules : set of Rule;
 		private ruleCombAlg: CombAlg;
 	operations
 	
-			public Policy: Target * seq of Rule * CombAlg ==> Policy
+			public Policy: Target * set of Rule * CombAlg ==> Policy
 			Policy(t, r, rca) ==
 				(target := t;
 				 rules := r;
@@ -20,7 +20,7 @@ class Policy
 			GetTarget() ==
 				(return target);
 				
-			public GetRules: () ==> seq of Rule
+			public GetRules: () ==> set of Rule
 			GetRules() ==
 				(return rules);
 				
@@ -28,15 +28,15 @@ class Policy
 			GetRuleCombAlg() ==
 				(return ruleCombAlg);
 				
-			public GetRulesByEffect: Effect ==> seq of Rule
+			public GetRulesByEffect: Effect ==> set of Rule
 			GetRulesByEffect(effect) ==
-				(dcl permits : seq of Rule := [];
-				 for r in rules do (
+				(dcl permits : set of Rule := {};
+				 for all r in set rules do (
 				 		if(r.GetEffect() = effect)
-				 		then permits := permits ^ [r];
+				 		then permits := permits union {r};
 				 );
 				 return permits;
 				)
-				pre len rules <> 0;
+				-- Still need to check the pre and post conditions
 				
 end Policy

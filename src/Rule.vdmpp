@@ -8,7 +8,8 @@ class Rule
 	
 		public Rule: Target ==> Rule
 		Rule(t) ==
-			(target := t; return self);
+			(target := t; return self)
+		post target = t;
 			
 		public GetTarget: () ==> Target
 		GetTarget() ==
@@ -17,5 +18,10 @@ class Rule
 		public GetEffect: () ==> Effect
 		GetEffect() ==
 			(return effect);
+			
+		public SetEffect: Effect ==> ()
+		SetEffect(e) ==
+			(effect := e)
+		post effect = e;
 			
 end Rule

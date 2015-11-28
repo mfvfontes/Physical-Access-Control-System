@@ -1,0 +1,16 @@
+class PAP -- Policy Access Point
+
+	instance variables
+		private policies : set of Policy;
+	operations
+
+		public PAP: set of Policy ==> PAP
+		PAP(p) ==
+			(policies := p;
+			 return self);
+			 
+		public GetPolicies: () ==> set of Policy
+		GetPolicies() ==
+			(return policies);
+
+end PAP
