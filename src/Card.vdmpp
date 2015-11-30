@@ -1,10 +1,10 @@
 
 class Card
 	types
-		public Identifier = <X>;
+		public Identifier = int;
 		public Date :: year : nat month : nat day : nat;
 	instance variables
-		private id : Identifier;
+		private identifier : Identifier;
 		private exp_date : Date;
 		
 		inv exp_date.day <= 31 and
@@ -16,15 +16,15 @@ class Card
 	operations
 		
 		public Card: Identifier * Date ==> Card
-		Card (identifier, ed) ==
-			(id := identifier; 
+		Card (id, ed) ==
+			(identifier := id;
 			 exp_date := ed;
 			 return self)
-		post id = identifier;
+		post exp_date = ed;
 		
 		public GetID: () ==> Identifier
 		GetID() ==
-			(return id);
+			(return identifier);
 		
 		public GetExpDate: () ==> Date
 		GetExpDate() ==

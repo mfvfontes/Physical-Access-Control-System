@@ -1,0 +1,14 @@
+class Environment
+	types
+		public Date :: year : nat month : nat day : nat;
+	instance variables
+		public permit_date : Date;
+	operations
+		
+		public Environment: Date ==> Environment
+		Environment(pd) ==
+			(permit_date := pd;
+			 return self)
+		post permit_date = pd;
+		
+end Environment

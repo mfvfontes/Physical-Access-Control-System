@@ -3,6 +3,7 @@ class Facility
 		public String = seq of char;
 		public Log = seq of Access;
 		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
+		public Type = <Hotel> | <School> | <Bank>
 	instance variables
 		private name : String;
 		private log : Log := [];

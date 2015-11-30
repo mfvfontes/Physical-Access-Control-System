@@ -1,16 +1,31 @@
 class Rule
 	types
-		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>
+		public Identifier = nat;
+		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
+		public String = seq of char;
 	instance variables
+		public identifier: Identifier;
+		private description: String;
 		private target : Target;
 		private effect : Effect := <Deny>;
 	operations
 	
-		public Rule: Target ==> Rule
-		Rule(t) ==
-			(target := t; return self)
+		public Rule: Identifier * String * Target ==> Rule
+		Rule(id, d, t) ==
+			(identifier := id;
+			 description := d;
+			 target := t; 
+			 return self)
 		post target = t;
-			
+		
+		public GetIdentifier: () ==> Identifier
+		GetIdentifier() ==
+			(return identifier);
+		
+		public GetDescription: () ==> String
+		GetDescription() ==
+			(return description);
+		
 		public GetTarget: () ==> Target
 		GetTarget() ==
 			(return target);

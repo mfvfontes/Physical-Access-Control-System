@@ -6,13 +6,15 @@ class Target
 		private subjects : set of Subject;
 		private resources : set of Resource;
 		private actions : set of Action;
+		private environment: Environment;
 	operations
 	
-		public Target: set of Subject * set of Resource * set of Action ==> Target
-		Target(s, r, a) ==
+		public Target: set of Subject * set of Resource * set of Action * Environment ==> Target
+		Target(s, r, a, e) ==
 			(subjects := s;
 			 resources := r;
 			 actions := a;
+			 environment := e;
 			 return self);
 		
 		public GetSubjects: () ==> set of Subject
@@ -26,5 +28,9 @@ class Target
 		public GetActions: () ==> set of Action
 		GetActions() ==
 			(return actions);
+			
+		public GetEnvironment: () ==> Environment
+		GetEnvironment() ==
+			(return environment);
 		
 end Target
