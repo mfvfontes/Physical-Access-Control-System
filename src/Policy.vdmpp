@@ -14,19 +14,39 @@ class Policy
 				(target := t;
 				 rules := r;
 				 ruleCombAlg := rca;
-				 return self);
+				 return self)
+				pre (card rules > 0)
+			  post (target = t and 
+			  			rules = r and
+			  			ruleCombAlg = rca);
 			
 			public GetTarget: () ==> Target
 			GetTarget() ==
 				(return target);
 				
+			public SetTarget: Target ==> ()
+			SetTarget(t) ==
+				(target := t)
+				post (target = t);
+				
 			public GetRules: () ==> set of Rule
 			GetRules() ==
 				(return rules);
 				
+			public SetRules: set of Rule ==> ()
+			SetRules(r) ==
+				(rules := r)
+				pre (card rules > 0)
+				post (rules = r);
+				
 			public GetRuleCombAlg: () ==> CombAlg
 			GetRuleCombAlg() ==
 				(return ruleCombAlg);
+				
+			public SetRuleCombAlg: CombAlg ==> ()
+			SetRuleCombAlg(rca) ==
+				(ruleCombAlg := rca)
+				post (ruleCombAlg = rca);
 				
 			public GetRulesByEffect: Effect ==> set of Rule
 			GetRulesByEffect(effect) ==
@@ -37,6 +57,7 @@ class Policy
 				 );
 				 return permits;
 				)
+				pre (card rules > 0)
 				-- Still need to check the pre and post conditions
 				
 end Policy

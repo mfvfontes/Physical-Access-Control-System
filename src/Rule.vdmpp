@@ -3,20 +3,30 @@ class Rule
 		public Identifier = nat;
 		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
 		public String = seq of char;
+		-- public Condition = seq of char;
 	instance variables
-		public identifier: Identifier;
+		private identifier: Identifier;
 		private description: String;
 		private target : Target;
 		private effect : Effect := <Deny>;
+		private facilityGroup : String;
+		private userGroup : String;
+		-- private condition: Condition;
 	operations
 	
-		public Rule: Identifier * String * Target ==> Rule
-		Rule(id, d, t) ==
+		public Rule: Identifier * String * Target * String * String ==> Rule
+		Rule(id, d, t, fg, ug) ==
 			(identifier := id;
 			 description := d;
-			 target := t; 
+			 target := t;
+			 facilityGroup := fg;
+			 userGroup := ug; 
 			 return self)
-		post target = t;
+		post (identifier = id and
+					target = t and
+					description = d and
+					facilityGroup = fg and
+					userGroup = ug);
 		
 		public GetIdentifier: () ==> Identifier
 		GetIdentifier() ==
@@ -26,10 +36,20 @@ class Rule
 		GetDescription() ==
 			(return description);
 		
+		public SetDescription: String ==> ()
+		SetDescription(d) ==
+			(description := d)
+			post (description = d);
+		
 		public GetTarget: () ==> Target
 		GetTarget() ==
 			(return target);
 			
+		public SetTarget: Target ==> ()
+		SetTarget(t) ==
+			(target := t)
+			post (target = t);	
+		
 		public GetEffect: () ==> Effect
 		GetEffect() ==
 			(return effect);
@@ -37,6 +57,24 @@ class Rule
 		public SetEffect: Effect ==> ()
 		SetEffect(e) ==
 			(effect := e)
-		post effect = e;
+			post (effect = e);
+		
+		public GetFacilityGroup: () ==> String
+		GetFacilityGroup() ==
+			(return facilityGroup);
+			
+		public SetFacilityGroup: String ==> ()
+		SetFacilityGroup(fg) ==
+			(facilityGroup := fg)
+			post (facilityGroup = fg);
+			
+		public GetUserGroup: () ==> String
+		GetUserGroup() ==
+			(return userGroup);
+			
+		public setUserGroup: String ==> ()
+		setUserGroup(ug) ==
+			(userGroup := ug)
+			post (userGroup = ug);
 			
 end Rule

@@ -3,17 +3,24 @@ class SYS
 		public String = seq of char;
 	instance variables
 		private name : String;
+		private facility: Facility;
 		private requests : seq of Request := [];
 	operations
 	
-		public SYS: String ==> SYS
-		SYS(n) ==
-			(name := n)
-		post name = n;
+		public SYS: String * Facility ==> SYS
+		SYS(n, f) ==
+			(name := n;
+			 facility := f)
+			post (name = n and
+					facility = f);
 	
 		public GetName: () ==> String
 		GetName() ==
 			(return name);
+			
+		public GetFacility: () ==> Facility
+		GetFacility() ==
+			(return facility);
 			
 		public AddRequest: Request ==> ()
 		AddRequest(r) ==

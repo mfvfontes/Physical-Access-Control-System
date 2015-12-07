@@ -22,12 +22,27 @@ class Access
 		GetAction () ==
 			(return action);
 			
+		public SetAction: Action ==> ()
+		SetAction(a) ==
+			(action := a)
+			post (action = a);
+			
 		public GetTarget: () ==> Target
 		GetTarget () ==
 			(return target);
 			
+		public SetTarget: Target ==> ()
+		SetTarget(t) ==
+			(target := t)
+			post (target = t);
+			
 		public GetEffect: () ==> Effect
 		GetEffect () ==
 			(return effect);
+			
+		public SetEffect: Effect ==> ()
+		SetEffect (e) ==
+			(effect := e)
+			post (effect = e);
 		
 end Access

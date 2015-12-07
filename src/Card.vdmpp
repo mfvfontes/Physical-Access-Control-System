@@ -20,7 +20,8 @@ class Card
 			(identifier := id;
 			 exp_date := ed;
 			 return self)
-		post exp_date = ed;
+		post (exp_date = ed and 
+					identifier = id);
 		
 		public GetID: () ==> Identifier
 		GetID() ==
@@ -29,5 +30,21 @@ class Card
 		public GetExpDate: () ==> Date
 		GetExpDate() ==
 			(return exp_date);
+		
+		public SetExpDate: Date ==> ()
+		SetExpDate(d) ==
+			(exp_date := d)
+		post (exp_date = d);
+		
+		public RemoveExpDate: () ==> ()
+		RemoveExpDate() ==
+			(dcl date : Date;
+			 date.day := 1;
+			 date.month := 1;
+			 date.year := 1900;
+			 exp_date := date)
+		pre (exp_date.day <> 1 and 
+				 exp_date.month <> 1 and 
+				 exp_date.year <> 1900);
 		
 end Card

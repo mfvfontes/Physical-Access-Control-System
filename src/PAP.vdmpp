@@ -7,10 +7,18 @@ class PAP -- Policy Access Point
 		public PAP: set of Policy ==> PAP
 		PAP(p) ==
 			(policies := p;
-			 return self);
+			 return self)
+			 pre (card policies > 0)
+			 post (policies = p);
 			 
 		public GetPolicies: () ==> set of Policy
 		GetPolicies() ==
 			(return policies);
+			
+		public SetPolicies: set of Policy ==> ()
+		SetPolicies(p) ==
+			(policies := p)
+			pre (card policies > 0)
+			post (policies = p);
 
 end PAP
