@@ -17,5 +17,10 @@ class Request
 		public GetStatus: () ==> Status
 		GetStatus () ==
 			(return status);
+			
+		public SetStatus: Status ==> ()
+		SetStatus(s) ==
+			(status := s)
+			post (status = s);
 		
 end Request

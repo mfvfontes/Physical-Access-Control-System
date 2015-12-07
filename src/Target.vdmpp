@@ -15,22 +15,52 @@ class Target
 			 resources := r;
 			 actions := a;
 			 environment := e;
-			 return self);
+			 return self)
+			pre (card subjects > 0 and
+					 card resources > 0 and
+					 card actions > 0)
+			post (subjects = s and
+						resources = r and
+						actions = a and
+						environment = e);
 		
 		public GetSubjects: () ==> set of Subject
 		GetSubjects() ==
 			(return subjects);
 		
+		public SetSubjects: set of Subject ==> ()
+		SetSubjects(s) ==
+			(subjects := s)
+			pre (card s > 0)
+			post (subjects = s);
+		
 		public GetResources: () ==> set of Resource
 		GetResources() ==
 			(return resources);
 			
+		public SetResources: set of Resource ==> ()
+		SetResources(r) ==
+			(resources := r)
+			pre (card r > 0)
+			post (resources = r);
+			
 		public GetActions: () ==> set of Action
 		GetActions() ==
 			(return actions);
-			
+		
+		public SetActions: set of Action ==> ()
+		SetActions (a) ==
+			(actions := a)
+			pre (card a > 0)
+			post (actions = a);
+		
 		public GetEnvironment: () ==> Environment
 		GetEnvironment() ==
 			(return environment);
+			
+		public SetEnvironment: Environment ==> ()
+		SetEnvironment(e) ==
+			(environment := e)
+			post (environment = e);
 		
 end Target

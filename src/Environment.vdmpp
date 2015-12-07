@@ -11,4 +11,13 @@ class Environment
 			 return self)
 		post permit_date = pd;
 		
+		public GetPermitDate: () ==> Date
+		GetPermitDate() ==
+			(return permit_date);
+			
+		public SetPermitDate: Date ==> ()
+		SetPermitDate(pd) ==
+			(permit_date := pd)
+			post (permit_date = pd);
+		
 end Environment

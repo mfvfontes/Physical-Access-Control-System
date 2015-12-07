@@ -18,13 +18,23 @@ class Facility
 			GetName () ==
 				return name;
 				
+			public SetName: String ==> ()
+			SetName(n) ==
+				(name := n)
+				post (name = n);
+				
 			public GetLog: () ==> Log
 			GetLog () ==
 				return log;
 			
+			public SetLog: Log ==> ()
+			SetLog (l) ==
+				(log := l)
+				post (log = l);
+			
 			public AddAccess: Access ==> ()
 			AddAccess(a) ==
-				(log := log ^ [a]);				
+				(log := log ^ [a]);
 				
 			public GetAccessesByType: Effect ==> seq of Access
 			GetAccessesByType (effect) ==

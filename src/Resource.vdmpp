@@ -14,4 +14,9 @@ class Resource
 		GetName() ==
 			(return name);
 		
+		public SetName: String ==> ()
+		SetName(n) ==
+			(name := n)
+			post (name = n);
+		
 end Resource
