@@ -3,7 +3,6 @@ class Rule
 		public Identifier = nat;
 		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
 		public String = seq of char;
-		-- public Condition = seq of char;
 	instance variables
 		private identifier: Identifier;
 		private description: String;
@@ -11,7 +10,7 @@ class Rule
 		private effect : Effect := <Deny>;
 		private facilityGroup : String;
 		private userGroup : String;
-		-- private condition: Condition;
+		private temporalConstraint : Date := new Date(1, 1, 1900);
 	operations
 	
 		public Rule: Identifier * String * Target * String * String ==> Rule
@@ -27,6 +26,23 @@ class Rule
 					description = d and
 					facilityGroup = fg and
 					userGroup = ug);
+		
+		public Rule: Identifier * String * Target * String * String * Date ==> Rule
+		Rule(id, d, t, fg, ug, tc) ==
+			(identifier := id;
+			 description := d;
+			 target := t;
+			 facilityGroup := fg;
+			 userGroup := ug;
+			 temporalConstraint := tc;
+			 return self)
+			pre (tc <> new Date(1, 1, 1900))
+			post (identifier = id and
+					target = t and
+					description = d and
+					facilityGroup = fg and
+					userGroup = ug and
+					temporalConstraint = tc);
 		
 		public GetIdentifier: () ==> Identifier
 		GetIdentifier() ==
@@ -72,9 +88,15 @@ class Rule
 		GetUserGroup() ==
 			(return userGroup);
 			
-		public setUserGroup: String ==> ()
-		setUserGroup(ug) ==
+		public SetUserGroup: String ==> ()
+		SetUserGroup(ug) ==
 			(userGroup := ug)
 			post (userGroup = ug);
+			
+		public SetTemporalConstraint: Date ==> ()
+		SetTemporalConstraint(tc) ==
+			(temporalConstraint := tc)
+			pre (tc <> new Date (1, 1, 1900))
+			post (temporalConstraint = tc);
 			
 end Rule

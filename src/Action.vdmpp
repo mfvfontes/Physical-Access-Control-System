@@ -1,6 +1,6 @@
 class Action
 	types
-		public Type = <Assign> | <View> | <Receive> 
+		public Type = <Assign> | <View> | <Receive>;
 	instance variables
 		private type : Type;
 	operations
@@ -13,5 +13,10 @@ class Action
 		public GetType: () ==> Type
 		GetType() ==
 			(return type);
+			
+		public SetType: Type ==> ()
+		SetType(t) ==
+			(type := t)
+			post (type = t);
 			
 end Action

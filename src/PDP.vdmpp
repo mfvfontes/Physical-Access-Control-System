@@ -14,7 +14,10 @@ class PDP
 		PDP(p, pca) ==
 			(policies := p;
 			 policyCombAlg := pca;
-			 return self);
+			 return self)
+			pre (card policies > 0)
+			post (policies = p and
+						policyCombAlg = pca);
 		
 		public GetPolicies: () ==> set of Policy
 		GetPolicies() ==
@@ -27,5 +30,12 @@ class PDP
 		public AddPolicy: Policy ==> ()
 		AddPolicy(p) ==
 			policies := policies union {p};
+			
+		public RemovePolicy: Policy ==> ()
+		RemovePolicy(p) ==
+			(policies := policies \ {p};)
+			pre (card policies > 0 and
+					 p in set policies)
+			post (not p in set policies);
 		
 end PDP

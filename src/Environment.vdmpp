@@ -1,6 +1,4 @@
 class Environment
-	types
-		public Date :: year : nat month : nat day : nat;
 	instance variables
 		public permit_date : Date;
 	operations

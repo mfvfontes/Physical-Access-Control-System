@@ -1,0 +1,50 @@
+class Date
+
+	instance variables
+		private day : nat;
+		private month : nat;
+		private year : nat;
+		
+		inv day <= 31 and
+			  month <= 12 and
+			  if month in set {4, 6, 9, 11}
+			  then day <= 30
+			  else (month = 2) => (day <= 29);
+			  
+	operations
+	
+		public Date: nat * nat * nat ==> Date
+		Date(d, m, y) ==
+			(day := d;
+			 month := m;
+			 year := y;
+			 return self)
+			post (day = d and
+						month = m and
+						year = y);
+						
+		public GetDay: () ==> nat
+		GetDay() ==
+			(return day);
+			
+		public SetDay: nat ==> ()
+		SetDay(d) ==
+			(day := d);
+			
+		public GetMonth: () ==> nat
+		GetMonth() ==
+			(return month);
+			
+		public SetMonth: nat ==> ()
+		SetMonth(m) ==
+			(month := m);
+			
+		public GetYear: () ==> nat
+		GetYear() ==
+			(return year);
+			
+		public SetYear: nat ==> ()
+		SetYear(y) ==
+			(year := y);
+
+end Date

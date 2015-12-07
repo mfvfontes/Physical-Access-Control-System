@@ -12,7 +12,8 @@ class Request
 			(line := l;
 			 status := <Pending>;
 			 return self)
-		post line = l;
+			post (line = l and
+						status = <Pending>);
 		
 		public GetStatus: () ==> Status
 		GetStatus () ==

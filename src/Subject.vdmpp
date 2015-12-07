@@ -9,7 +9,8 @@ class Subject
 		public Subject: String ==> Subject
 		Subject (n) ==
 			(name := n; return self)
-		post name = n;
+			pre (len name > 0)
+			post (name = n);
 		
 		public GetName: () ==> String
 		GetName() ==
@@ -18,6 +19,7 @@ class Subject
 		public SetName: String ==> ()
 		SetName(n) ==
 			(name := n)
+			pre (len name > 0)
 			post (name = n);
 		
 end Subject

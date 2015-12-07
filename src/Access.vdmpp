@@ -1,7 +1,7 @@
 
 class Access
 	types
-		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>
+		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
 	instance variables
 		private action : Action;
 		private target : Target;
