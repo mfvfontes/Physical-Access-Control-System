@@ -5,8 +5,11 @@ class RulesTest
 
 	instance variables
 	
-		s1 : Subject := new Subject("Owner");
-		s2 : Subject := new Subject("Manager");
+		c1 : Card := new Card(new Date(18, 12, 2015));
+		c2 : Card := new Card(new Date(18, 12, 2015));
+	
+		s1 : Subject := new Subject("Owner", c1);
+		s2 : Subject := new Subject("Manager", c2);
 		
 		r1 : Resource := new Resource("Account");
 		

@@ -1,0 +1,42 @@
+class CardsTest
+
+	instance variables
+	
+		d1 : Date := new Date(18, 12, 2015);
+		d2 : Date := new Date(19, 11, 2015);
+		d3 : Date := new Date(1, 1, 1900);
+		
+		c1 : Card := new Card(d1);
+	
+	operations
+	
+		private assertTrue: bool ==> ()
+		assertTrue(cond) == 
+			(return)
+    	pre cond;
+	
+		private TestID: () ==> ()
+		TestID() ==
+			(assertTrue(c1.GetID() = 1);
+			 assertTrue(c1.GetLastID() = 2); 
+			 );
+
+		private TestExpirationDate: () ==> ()
+		TestExpirationDate() ==
+			(assertTrue(d1.equals(c1.GetExpDate()));
+			 c1.SetExpDate(d2);
+			 assertTrue(d2.equals(c1.GetExpDate()));
+			 c1.RemoveExpDate();
+			 assertTrue(d3.equals(c1.GetExpDate())); 
+			);
+		
+		public static main: () ==> ()
+		main() ==
+			(dcl cards_test : CardsTest := new CardsTest();
+			 cards_test.TestID();
+			 cards_test.TestExpirationDate();
+			);
+	
+	traces
+
+end CardsTest

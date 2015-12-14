@@ -4,13 +4,17 @@ class Subject
 		public String = seq of char
 	instance variables
 		private name : String;
+		private subject_card : Card;
 	operations
 	
-		public Subject: String ==> Subject
-		Subject (n) ==
-			(name := n; return self)
-			pre (len n > 0)
-			post (name = n);
+		public Subject: String * Card ==> Subject
+		Subject (n, sc) ==
+			(name := n;
+			 subject_card := sc; 
+			 return self)
+		pre (len n > 0)
+		post (name = n and
+					subject_card = sc);
 		
 		public GetName: () ==> String
 		GetName() ==
@@ -19,7 +23,16 @@ class Subject
 		public SetName: String ==> ()
 		SetName(n) ==
 			(name := n)
-			pre (len n > 0)
-			post (name = n);
+		pre (len n > 0)
+		post (name = n);
+			
+		public GetCard: () ==> Card
+		GetCard() ==
+			(return subject_card);
+			
+		public SetCard: Card ==> ()
+		SetCard(sc) ==
+			(subject_card := sc)
+		post (subject_card = sc);
 		
 end Subject
