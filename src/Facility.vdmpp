@@ -45,6 +45,6 @@ class Facility
 				 );
 				 return accesses;
 				)
-			pre len log <> 0;
+			pre len log <> 0
 			
 end Facility

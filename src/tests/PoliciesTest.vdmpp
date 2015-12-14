@@ -1,0 +1,58 @@
+class PoliciesTest
+
+	types
+		public String = seq of char;
+
+	instance variables
+	
+		-- Targets
+	
+		s1 : Subject := new Subject("Owner");
+		s2 : Subject := new Subject("Manager");
+		
+		r1 : Resource := new Resource("Account");
+		
+		a1 : Action := new Action(<View>);
+		a2 : Action := new Action(<Assign>);
+		
+		target : Target := new Target({s1, s2}, {r1}, {a1, a2});
+		
+		-- Rules
+		
+		rule1 : Rule := new Rule("If user is an Owner and Manager then is permitted to view and assign an Account",
+														target,
+														<Permit>,
+														"Common Users", 
+														"Bank Users");
+														
+		rule2 : Rule := new Rule("If user is an Owner and Manager then is denied to view and assign an Account",
+														target,
+														<Deny>,
+														"Common Users",
+														"Bank Users");
+		
+		rules : set of Rule := {rule1, rule2};
+		
+		policy : Policy := new Policy(target, rules, <permitOverrides>);
+		
+	operations
+		
+		private assertTrue: bool ==> ()
+		assertTrue(cond) == 
+			(return)
+    	pre cond;
+	
+		private TestPolicy: () ==> ()
+		TestPolicy() ==
+			(assertTrue(policy.GetDecision() = <Permit>);
+			 policy.SetRuleCombAlg(<denyOverrides>);
+			 assertTrue(policy.GetDecision() = <Deny>)
+			);
+		
+		public static main: () ==> ()
+		main() ==
+			(new PoliciesTest().TestPolicy());
+	
+	traces
+
+end PoliciesTest

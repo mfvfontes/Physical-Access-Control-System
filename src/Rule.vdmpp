@@ -11,42 +11,53 @@ class Rule
 		private facilityGroup : String;
 		private userGroup : String;
 		private temporalConstraint : Date := new Date(1, 1, 1900);
+		public static last_identifier: Identifier := 1;
+		
 	operations
 	
-		public Rule: Identifier * String * Target * String * String ==> Rule
-		Rule(id, d, t, fg, ug) ==
-			(identifier := id;
+		public Rule: String * Target * Effect * String * String ==> Rule
+		Rule(d, t, e, fg, ug) ==
+			(identifier := last_identifier;
 			 description := d;
 			 target := t;
+			 effect := e;
 			 facilityGroup := fg;
-			 userGroup := ug; 
+			 userGroup := ug;
+			 last_identifier := last_identifier + 1; 
 			 return self)
-		post (identifier = id and
+		post (description = d and
 					target = t and
-					description = d and
+					effect = e and
 					facilityGroup = fg and
-					userGroup = ug);
-		
-		public Rule: Identifier * String * Target * String * String * Date ==> Rule
-		Rule(id, d, t, fg, ug, tc) ==
-			(identifier := id;
+					userGroup = ug and
+					last_identifier <> last_identifier~);
+				
+		public Rule: String * Target * Effect * String * String * Date ==> Rule
+		Rule(d, t, e, fg, ug, tc) ==
+			(identifier := last_identifier;
 			 description := d;
 			 target := t;
+			 effect := e;
 			 facilityGroup := fg;
 			 userGroup := ug;
 			 temporalConstraint := tc;
+			 last_identifier := last_identifier + 1;
 			 return self)
-			pre (tc <> new Date(1, 1, 1900))
-			post (identifier = id and
+		pre (tc <> new Date(1, 1, 1900))
+		post (description = d and
 					target = t and
-					description = d and
 					facilityGroup = fg and
 					userGroup = ug and
-					temporalConstraint = tc);
+					temporalConstraint = tc and
+					last_identifier = last_identifier~);
 		
 		public GetIdentifier: () ==> Identifier
 		GetIdentifier() ==
 			(return identifier);
+		
+		public static GetLastID: () ==> Identifier
+		GetLastID() == 
+			(return last_identifier);
 		
 		public GetDescription: () ==> String
 		GetDescription() ==
@@ -92,11 +103,15 @@ class Rule
 		SetUserGroup(ug) ==
 			(userGroup := ug)
 			post (userGroup = ug);
-			
+		
+		public GetTemporalConstraint: () ==> Date
+		GetTemporalConstraint() ==
+			(return temporalConstraint);
+		
 		public SetTemporalConstraint: Date ==> ()
 		SetTemporalConstraint(tc) ==
 			(temporalConstraint := tc)
-			pre (tc <> new Date (1, 1, 1900))
+			pre (not tc.equals(new Date (1, 1, 1900)))
 			post (temporalConstraint = tc);
 			
 end Rule

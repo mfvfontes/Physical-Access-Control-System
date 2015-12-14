@@ -1,0 +1,63 @@
+class RulesTest
+
+	types
+		public String = seq of char;
+
+	instance variables
+	
+		s1 : Subject := new Subject("Owner");
+		s2 : Subject := new Subject("Manager");
+		
+		r1 : Resource := new Resource("Account");
+		
+		a1 : Action := new Action(<View>);
+		a2 : Action := new Action(<Assign>);
+		
+		target : Target := new Target({s1, s2}, {r1}, {a1, a2});
+		
+		-- Rules
+		
+		rule : Rule := new Rule("If user is an Owner and Manager then is permitted to view and assign an Account",
+														target,
+														<Permit>,
+														"Common Users", 
+														"Bank Users");
+														
+		rule2 : Rule := new Rule("Some description",
+														target,
+														<Permit>,
+														"Other Users",
+														"Some Users");
+	
+	operations
+	
+		private assertTrue: bool ==> ()
+		assertTrue(cond) == 
+			(return)
+    	pre cond;
+			
+		private TestEffect: () ==> ()
+		TestEffect() ==
+			(assertTrue(rule.GetEffect() = <Permit>);
+			 rule.SetEffect(<Deny>);
+			 assertTrue(rule.GetEffect() = <Deny>);
+			);
+		
+		private TestID: () ==> ()
+		TestID() ==
+			(assertTrue(rule.GetIdentifier() = 1);
+			 assertTrue(rule.GetLastID() = 3); -- it has to be three because we declared rule2 above and therefore last_identifier is now at 3
+			 assertTrue(rule2.GetIdentifier() = 2);
+			 assertTrue(rule2.GetLastID() = 3); -- the same happens here since we rule2 was already created
+			 );
+		
+		public static main: () ==> ()
+		main() ==
+			(dcl rules_test : RulesTest := new RulesTest();
+			 rules_test.TestEffect();
+			 rules_test.TestID();
+			);
+	
+	traces
+
+end RulesTest

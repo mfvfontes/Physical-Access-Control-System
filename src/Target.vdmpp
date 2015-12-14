@@ -1,7 +1,6 @@
 
 class Target
-	types
-		public Resource = <Int> | <Ext>
+
 	instance variables
 		private subjects : set of Subject;
 		private resources : set of Resource;
@@ -9,20 +8,18 @@ class Target
 		private environment: Environment;
 	operations
 	
-		public Target: set of Subject * set of Resource * set of Action * Environment ==> Target
-		Target(s, r, a, e) ==
+		public Target: set of Subject * set of Resource * set of Action ==> Target
+		Target(s, r, a) ==
 			(subjects := s;
 			 resources := r;
 			 actions := a;
-			 environment := e;
 			 return self)
-			pre (card subjects > 0 and
-					 card resources > 0 and
-					 card actions > 0)
+			pre (card s > 0 and
+					 card r > 0 and
+					 card a > 0)
 			post (subjects = s and
 						resources = r and
-						actions = a and
-						environment = e);
+						actions = a);
 		
 		public GetSubjects: () ==> set of Subject
 		GetSubjects() ==

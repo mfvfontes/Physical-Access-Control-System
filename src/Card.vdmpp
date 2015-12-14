@@ -1,24 +1,31 @@
 
 class Card
 	types
-		public Identifier = int;
+		public Identifier = nat;
 	instance variables
+		public static last_identifier : Identifier := 1;
 		private identifier : Identifier;
 		private exp_date : Date;
 			
 	operations
 		
-		public Card: Identifier * Date ==> Card
-		Card (id, ed) ==
-			(identifier := id;
+		public Card: Date ==> Card
+		Card (ed) ==
+			(identifier := last_identifier;
 			 exp_date := ed;
+			 last_identifier := last_identifier + 1;
 			 return self)
-		post (exp_date = ed and 
-					identifier = id);
+		post (identifier = last_identifier~ and
+					exp_date = ed and 
+					last_identifier <> last_identifier~);
 		
 		public GetID: () ==> Identifier
 		GetID() ==
 			(return identifier);
+		
+		public static GetLastID: () ==> Identifier
+		GetLastID() ==
+			(return last_identifier);
 		
 		public GetExpDate: () ==> Date
 		GetExpDate() ==

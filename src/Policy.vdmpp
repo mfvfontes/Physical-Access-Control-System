@@ -7,6 +7,10 @@ class Policy
 		private target : Target;
 		private rules : set of Rule;
 		private ruleCombAlg: CombAlg;
+		
+		inv forall r in set rules & r.GetTarget() = target;
+		--[r | r in set rules & r.GetTarget() = target];
+		
 	operations
 	
 			public Policy: Target * set of Rule * CombAlg ==> Policy
@@ -15,7 +19,7 @@ class Policy
 				 rules := r;
 				 ruleCombAlg := rca;
 				 return self)
-				pre (card rules > 0)
+				pre (card r > 0)
 			  post (target = t and 
 			  			rules = r and
 			  			ruleCombAlg = rca);
@@ -36,7 +40,7 @@ class Policy
 			public SetRules: set of Rule ==> ()
 			SetRules(r) ==
 				(rules := r)
-				pre (card rules > 0)
+				pre (card r > 0)
 				post (rules = r);
 				
 			public GetRuleCombAlg: () ==> CombAlg
@@ -57,7 +61,27 @@ class Policy
 				 );
 				 return permits;
 				)
-				pre (card rules > 0)
+				pre (card rules > 0);
+				
 				-- Still need to check the pre and post conditions
+				
+			public GetDecision: () ==> Effect
+			GetDecision() ==
+				(dcl decision : Effect := <Deny>;
+				 for all r in set rules do (
+				 	if(ruleCombAlg = <denyOverrides>)
+				 	then (if(r.GetEffect() = <Deny>)
+				 			 then (decision := <Deny>;
+				 			 			return decision))
+				 	elseif(ruleCombAlg = <permitOverrides>)
+				 	then (if(r.GetEffect() = <Permit>)
+				 			 then (decision := <Permit>;
+				 			 			return decision))
+				 );
+				 decision := <Indeterminate>;
+				 return decision;
+				)
+				pre (card rules > 0 and
+						 ruleCombAlg <> nil);
 				
 end Policy

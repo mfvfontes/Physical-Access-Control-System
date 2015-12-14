@@ -46,5 +46,12 @@ class Date
 		public SetYear: nat ==> ()
 		SetYear(y) ==
 			(year := y);
+			
+		public equals: Date ==> bool
+		equals(d) ==
+			(return (day = d.day and 
+							month = d.month and 
+							year = d.year)
+			);
 
 end Date
