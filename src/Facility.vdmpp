@@ -49,6 +49,18 @@ class Facility
 			AddAccess(a) ==
 				(log := log ^ [a]);
 				
+			public RemoveAccess: Access ==> ()
+			RemoveAccess(a) ==
+				(dcl new_log : Log := [];
+				 for l in log do (
+				 		if(l <> a)
+				 		then new_log := new_log ^ [l];
+				 );
+				 log := new_log;
+				)
+				pre (len log > 0)
+				post (len log < len log~);
+				
 			public GetAccessesByType: Effect ==> seq of Access
 			GetAccessesByType (effect) ==
 				(dcl accesses : seq of Access := [];

@@ -28,10 +28,25 @@ class FacilitiesTest
 		TestEmptyLog() ==
 			(assertTrue(f1.GetLog() = []));
 	
+		public TestAddAccess: () ==> ()
+		TestAddAccess() ==
+			(f1.AddAccess(ac1);
+			 assertTrue(f1.GetLog() <> []);
+			);
+	
+		public TestRemoveAccess: () ==> ()
+		TestRemoveAccess() ==
+			(f1.AddAccess(ac1);
+			 assertTrue(f1.GetLog() <> []);
+			 f1.RemoveAccess(ac1);
+			 assertTrue(f1.GetLog() = []);
+			);
+	
 		public static main: () ==> ()
 		main() ==
 			(dcl facilities_test : FacilitiesTest := new FacilitiesTest();
 			 facilities_test.TestEmptyLog();
+			 facilities_test.TestAddAccess();
 			);
 	
 	traces

@@ -29,7 +29,8 @@ class PDP
 			
 		public AddPolicy: Policy ==> ()
 		AddPolicy(p) ==
-			policies := policies union {p};
+			policies := policies union {p}
+		post (p in set policies);
 			
 		public RemovePolicy: Policy ==> ()
 		RemovePolicy(p) ==

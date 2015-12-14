@@ -21,6 +21,21 @@ class Target
 						resources = r and
 						actions = a);
 		
+		public Target: set of Subject * set of Resource * set of Action * Environment ==> Target
+		Target(s, r, a, e) ==
+			(subjects := s;
+			 resources := r;
+			 actions := a;
+			 environment := e;
+			 return self)
+			pre (card s > 0 and
+					 card r > 0 and
+					 card a > 0)
+			post (subjects = s and
+						resources = r and
+						actions = a and
+						environment = e);
+		
 		public GetSubjects: () ==> set of Subject
 		GetSubjects() ==
 			(return subjects);
