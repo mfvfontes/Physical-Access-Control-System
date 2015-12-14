@@ -1,0 +1,39 @@
+class FacilitiesTest
+
+	types
+		public Effect = <Permit> | <Deny> | <Indeterminate> | <notApplicable>;
+
+	instance variables
+	
+		c1 : Card := new Card(new Date(18, 12, 2015));
+		a1 : Action := new Action(<View>);
+		r1 : Resource := new Resource("Account");
+		s1 : Subject := new Subject("John", c1);
+		e1 : Effect := <Permit>;
+		
+		t1 : Target := new Target({s1}, {r1}, {a1});
+	
+		ac1 : Access := new Access(t1, a1, e1);
+		
+		f1 : Facility := new Facility("Some Bank", <Bank>);
+	
+	operations
+	
+		private assertTrue: bool ==> ()
+		assertTrue(cond) == 
+			(return)
+    	pre cond;
+	
+		public TestEmptyLog: () ==> ()
+		TestEmptyLog() ==
+			(assertTrue(f1.GetLog() = []));
+	
+		public static main: () ==> ()
+		main() ==
+			(dcl facilities_test : FacilitiesTest := new FacilitiesTest();
+			 facilities_test.TestEmptyLog();
+			);
+	
+	traces
+
+end FacilitiesTest

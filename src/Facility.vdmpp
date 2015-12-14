@@ -7,12 +7,16 @@ class Facility
 	instance variables
 		private name : String;
 		private log : Log := [];
+		private type : Type;
 	operations
 			
-			public Facility: String ==> Facility
-			Facility (n) == 
-				(name := n; return self)
-				post name = n;
+			public Facility: String * Type ==> Facility
+			Facility (n, t) == 
+				(name := n; 
+				 type := t;
+				 return self)
+			post (name = n and
+							type = t);
 				
 			public GetName: () ==> String
 			GetName () ==
@@ -21,7 +25,16 @@ class Facility
 			public SetName: String ==> ()
 			SetName(n) ==
 				(name := n)
-				post (name = n);
+			post (name = n);
+				
+			public GetType: () ==> Type
+			GetType() ==
+				(return type);
+				
+			public SetType: Type ==> ()
+			SetType(t) ==
+				(type := t)
+			post (type = t);
 				
 			public GetLog: () ==> Log
 			GetLog () ==
@@ -30,7 +43,7 @@ class Facility
 			public SetLog: Log ==> ()
 			SetLog (l) ==
 				(log := l)
-				post (log = l);
+			post (log = l);
 			
 			public AddAccess: Access ==> ()
 			AddAccess(a) ==
@@ -45,6 +58,6 @@ class Facility
 				 );
 				 return accesses;
 				)
-			pre len log <> 0
+			pre len log <> 0;
 			
 end Facility
